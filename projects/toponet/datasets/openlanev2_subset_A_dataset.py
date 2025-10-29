@@ -96,6 +96,8 @@ class OpenLaneV2_subset_A_Dataset(Custom3DDataset):
             lidar2cam_rts = []
             cam_intrinsics = []
             for cam_name, cam_info in info['sensor'].items():
+                if cam_name == 'sd_map':
+                    continue
                 image_path = cam_info['image_path']
                 image_paths.append(os.path.join(self.data_root, image_path))
 
