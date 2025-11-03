@@ -444,24 +444,10 @@ class TopoNetHead(AnchorFreeHead):
     @force_fp32(apply_to=('preds_dicts'))
     def get_lanes(self, preds_dicts, img_metas, rescale=False):
 
-        pred_adj_lclc = preds_dicts['all_lclc_preds'][-1].squeeze(-1).sigmoid()
-
-        pred_adj_index_lclc = pred_adj_lclc > 0.05
-        pred_adj_lclc[pred_adj_index_lclc] = pred_adj_lclc[pred_adj_index_lclc] + 1.0
-
-        pred_adj_numpy_lclc = pred_adj_lclc.detach().cpu().numpy()
-
-        all_lclc_preds = pred_adj_numpy_lclc
+        all_lclc_preds = preds_dicts['all_lclc_preds'][-1].squeeze(-1).sigmoid().detach().cpu().numpy()
         all_lclc_preds = [_ for _ in all_lclc_preds]
 
-        pred_adj_lcte = preds_dicts['all_lcte_preds'][-1].squeeze(-1).sigmoid()
-
-        pred_adj_index_lcte = pred_adj_lcte > 0.05
-        pred_adj_lcte[pred_adj_index_lcte] = pred_adj_lcte[pred_adj_index_lcte] + 1.0
-
-        pred_adj_numpy_lcte = pred_adj_lcte.detach().cpu().numpy()
-
-        all_lcte_preds = pred_adj_numpy_lcte
+        all_lcte_preds = preds_dicts['all_lcte_preds'][-1].squeeze(-1).sigmoid().detach().cpu().numpy()
         all_lcte_preds = [_ for _ in all_lcte_preds]
 
         preds_dicts = self.bbox_coder.decode(preds_dicts)
