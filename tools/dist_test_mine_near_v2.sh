@@ -3,7 +3,7 @@ set -x
 
 timestamp=`date +"%y%m%d.%H%M%S"`
 
-WORK_DIR=work_dirs/toponet_near
+WORK_DIR=work_dirs/toponet_near_v2
 CONFIG=projects/configs/toponet_r50_8x1_24e_olv2_subset_A_near.py
 
 GPUS=$1

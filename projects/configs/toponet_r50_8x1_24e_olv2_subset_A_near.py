@@ -327,7 +327,7 @@ lr_config = dict(
     min_lr_ratio=1e-3)
 total_epochs = 24
 evaluation = dict(
-    interval=24, 
+    interval=24,
     pipeline=test_pipeline,
 )
 
@@ -339,7 +339,7 @@ log_config = dict(
         dict(type='TensorboardLoggerHook')
     ])
 
-checkpoint_config = dict(interval=1, max_keep_ckpts=5)
+checkpoint_config = dict(interval=1, max_keep_ckpts=25)
 
 dist_params = dict(backend='nccl')
 log_level = 'INFO'

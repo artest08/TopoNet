@@ -689,6 +689,12 @@ def evaluate(ground_truth, predictions, verbose=True, vertical_lower=-50.0, vert
         inject=False,  # save tp for eval on graph
     ).mean()
 
+    metrics['OpenLane-V2 Score']['ols_l'] = np.asarray([
+        metrics['OpenLane-V2 Score']['DET_l'],
+        metrics['OpenLane-V2 Score']['DET_l_chamfer'],
+        np.sqrt(metrics['OpenLane-V2 Score']['TOP_ll']),
+    ]).mean()
+
     _mAP_over_threshold(
         gts=gts,
         preds=preds,
