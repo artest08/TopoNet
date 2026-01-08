@@ -333,13 +333,13 @@ evaluation = dict(
 
 runner = dict(type='EpochBasedRunner', max_epochs=total_epochs)
 log_config = dict(
-    interval=3000,
+    interval=200,
     hooks=[
         dict(type='TextLoggerHook'),
         dict(type='TensorboardLoggerHook')
     ])
 
-checkpoint_config = dict(interval=1, max_keep_ckpts=25)
+checkpoint_config = dict(interval=1, max_keep_ckpts=5)
 
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
