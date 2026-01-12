@@ -277,11 +277,11 @@ test_pipeline = [
 
 data = dict(
     samples_per_gpu=1,
-    workers_per_gpu=8,
+    workers_per_gpu=2,
     train=dict(
         type=dataset_type,
         data_root=data_root,
-        ann_file=data_root + 'data_dict_subset_A_train.pkl',
+        ann_file=data_root + 'data_dict_subset_A_near_train.pkl',
         pipeline=train_pipeline,
         classes=class_names,
         modality=input_modality,
@@ -291,7 +291,7 @@ data = dict(
     val=dict(
         type=dataset_type,
         data_root=data_root,
-        ann_file=data_root + 'data_dict_subset_A_val.pkl',
+        ann_file=data_root + 'data_dict_subset_A_near_val.pkl',
         pipeline=test_pipeline,
         classes=class_names,
         modality=input_modality,
@@ -300,7 +300,7 @@ data = dict(
     test=dict(
         type=dataset_type,
         data_root=data_root,
-        ann_file=data_root + 'data_dict_subset_A_val.pkl',
+        ann_file=data_root + 'data_dict_subset_A_near_val.pkl',
         pipeline=test_pipeline,
         classes=class_names,
         modality=input_modality,
@@ -326,17 +326,20 @@ lr_config = dict(
     warmup_ratio=1.0 / 3,
     min_lr_ratio=1e-3)
 total_epochs = 24
-evaluation = dict(interval=1, pipeline=test_pipeline)
+evaluation = dict(
+    interval=24,
+    pipeline=test_pipeline,
+)
 
 runner = dict(type='EpochBasedRunner', max_epochs=total_epochs)
 log_config = dict(
-    interval=50,
+    interval=1000,
     hooks=[
         dict(type='TextLoggerHook'),
         dict(type='TensorboardLoggerHook')
     ])
 
-checkpoint_config = dict(interval=1, max_keep_ckpts=1)
+checkpoint_config = dict(interval=1, max_keep_ckpts=25, create_symlink=False)
 
 dist_params = dict(backend='nccl')
 log_level = 'INFO'

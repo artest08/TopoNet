@@ -281,7 +281,7 @@ data = dict(
     train=dict(
         type=dataset_type,
         data_root=data_root,
-        ann_file=data_root + 'data_dict_subset_A_train.pkl',
+        ann_file=data_root + 'data_dict_subset_A_farB_train.pkl',
         pipeline=train_pipeline,
         classes=class_names,
         modality=input_modality,
@@ -291,7 +291,7 @@ data = dict(
     val=dict(
         type=dataset_type,
         data_root=data_root,
-        ann_file=data_root + 'data_dict_subset_A_val.pkl',
+        ann_file=data_root + 'data_dict_subset_A_farB_val.pkl',
         pipeline=test_pipeline,
         classes=class_names,
         modality=input_modality,
@@ -300,7 +300,7 @@ data = dict(
     test=dict(
         type=dataset_type,
         data_root=data_root,
-        ann_file=data_root + 'data_dict_subset_A_val.pkl',
+        ann_file=data_root + 'data_dict_subset_A_farB_val.pkl',
         pipeline=test_pipeline,
         classes=class_names,
         modality=input_modality,
@@ -330,7 +330,7 @@ evaluation = dict(interval=1, pipeline=test_pipeline)
 
 runner = dict(type='EpochBasedRunner', max_epochs=total_epochs)
 log_config = dict(
-    interval=50,
+    interval=1000,
     hooks=[
         dict(type='TextLoggerHook'),
         dict(type='TensorboardLoggerHook')

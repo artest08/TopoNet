@@ -17,7 +17,8 @@ from pyquaternion import Quaternion
 from mmcv.parallel import DataContainer as DC
 from mmdet.datasets import DATASETS
 from mmdet3d.datasets import Custom3DDataset
-from openlanev2.evaluation import evaluate as openlanev2_evaluate
+# from openlanev2.evaluation import evaluate as openlanev2_evaluate
+from projects.openlanev2_evaluation.evaluate_v11 import evaluate as openlanev2_evaluate
 from openlanev2.utils import format_metric
 from openlanev2.visualization import draw_annotation_pv, assign_attribute, assign_topology
 
@@ -95,6 +96,8 @@ class OpenLaneV2_subset_A_Dataset(Custom3DDataset):
             lidar2cam_rts = []
             cam_intrinsics = []
             for cam_name, cam_info in info['sensor'].items():
+                if cam_name == 'sd_map':
+                    continue
                 image_path = cam_info['image_path']
                 image_paths.append(os.path.join(self.data_root, image_path))
 
