@@ -339,7 +339,7 @@ log_config = dict(
         dict(type='TensorboardLoggerHook')
     ])
 
-checkpoint_config = dict(interval=1, max_keep_ckpts=25)
+checkpoint_config = dict(interval=1, max_keep_ckpts=25, create_symlink=False)
 
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
