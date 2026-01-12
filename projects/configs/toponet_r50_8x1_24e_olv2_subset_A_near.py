@@ -341,6 +341,8 @@ log_config = dict(
 
 checkpoint_config = dict(interval=1, max_keep_ckpts=25, create_symlink=False)
 
+custom_hooks = [dict(type='DistBarrierHook', priority='VERY_LOW')]
+
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
 work_dir = None
